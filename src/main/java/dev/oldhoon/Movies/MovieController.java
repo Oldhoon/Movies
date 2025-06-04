@@ -10,12 +10,14 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 
 @RestController
 @RequestMapping("/api/v1/movies") // endpoint will be controlled by this controller 
+@CrossOrigin(origins = "*") // allows requests from any origin, useful for development
 public class MovieController {
 
     @Autowired
