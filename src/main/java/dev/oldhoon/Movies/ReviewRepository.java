@@ -9,4 +9,5 @@ public interface ReviewRepository extends MongoRepository<Review, ObjectId> {
     // No additional methods are needed here unless you want to define custom queries.
     // You can add custom query methods if needed, for example:
     // List<Review> findByMovieId(ObjectId movieId);
+    
 }

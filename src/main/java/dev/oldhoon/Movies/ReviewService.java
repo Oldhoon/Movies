@@ -1,5 +1,6 @@
 package dev.oldhoon.Movies;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -20,9 +21,23 @@ public class ReviewService {
 
         mongoTemplate.update(Movie.class)
                 .matching(Criteria.where("imdbId").is(imdbId))
-                .apply(new Update().push("reviewIds").value(review))
+                .apply(new Update().push("reviewId").value(review))
                 .first(); // update the first matching movie document
         
         return review;
+    }
+
+    public void deleteReview(ObjectId reviewId) {
+        if (!reviewRepository.existsById(reviewId)) {
+            throw new ReviewNotFoundException("Review with ID " + reviewId + " not found");
+        }
+        reviewRepository.deleteById(reviewId);
+
+    }
+
+    public Review updateReview(String reviewId, String updatedBody) {
+        Review review = reviewRepository.findById(new ObjectId(reviewId)).orElseThrow(()->new ReviewNotFoundException("not found"));
+        review.setBody(updatedBody);
+        return reviewRepository.save(review);
     }
 }
