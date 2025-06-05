@@ -1,4 +1,6 @@
 package dev.oldhoon.Movies;
+import java.util.List;
+
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
@@ -9,5 +11,6 @@ public interface ReviewRepository extends MongoRepository<Review, ObjectId> {
     // No additional methods are needed here unless you want to define custom queries.
     // You can add custom query methods if needed, for example:
     // List<Review> findByMovieId(ObjectId movieId);
+    List<Review> findAll();
     
 }

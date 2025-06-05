@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Reviews</title>
+</head>
+<body>
+    <h1>Movie Reviews</h1>
+
+    <ul>
+        <li th:each="review : ${reviews}">
+            <span th:text="${review.body}">Review Body</span>
+        </li>
+    </ul>
+
+    <h2>Submit a New Review</h2>
+    <form th:action="@{/api/v1/reviews/reviews}" method="post">
+        <label for="movieId">Movie ID:</label>
+        <input type="text" name="movieId" required /><br/>
+
+        <label for="body">Review:</label>
+        <textarea name="body" required></textarea><br/>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
